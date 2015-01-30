@@ -1,11 +1,15 @@
-#include <Time.h>
+ #include <Time.h>
 #include <PString.h>
 #include <DHT.h>
 #include <EEPROM.h>
 #include <Wire.h>
 #include <DS1307RTC.h>
 #include <avr/pgmspace.h>
-#include "Arduino.h"
+#include <Arduino.h>
+#include<SoftwareSerial.h>
+#include <Adafruit_MAX31855.h>
+#include<SPI.h>
+#define pH1address 99 //address is set on chip. Make sure to not configure other devices to run on address 99 (0x99)
 
 /*
 /!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!!
@@ -183,9 +187,18 @@ int pH1Pin = A3;
 int pH2Pin = A4;
 int TempPin = A0;
 
+
+//be sure to #include "Adafruit_MAX31855.h"
+int thermoDO = 3;
+int thermoCS = 4;
+int thermoCLK = 5;
+Adafruit_MAX31855 thermocouple(thermoCLK, thermoCS, thermoDO);
+
+
+
 //RH
 #define DHTPIN 28
-#define DHTTYPE DHT11   // DHT 11
+#define DHTTYPE DHT22   // DHT 11
 DHT dht(DHTPIN, DHTTYPE);
 
 int TDS1Pin = A5;
@@ -391,7 +404,7 @@ void setup()
   setTime(0,0,0,1,1,2013);
   setSyncProvider(RTC.get);
 
-  Serial1.begin(115200);
+  Serial.begin(115200);
 }
 
 
