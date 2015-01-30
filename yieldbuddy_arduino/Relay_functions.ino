@@ -58,14 +58,13 @@ void FillPumpTimesArrays(int tmp_Pump_start_hour, int tmp_Pump_start_min, int tm
       tmp_Pump_hour_array[i] = tmp_Pump_hour_array[i] - 12;
     }
 
-    Serial1.println();
-    Serial1.print("tmp_Pump_start_isAM:");       
-    Serial1.print(tmp_Pump_start_isAM);       
-    Serial1.println();
-    Serial1.print(tmp_Pump_hour_array[i]);
-    Serial1.print(") ");
-    Serial1.print(AMPM_int);
-    Serial1.println();
+    Serial.print("tmp_Pump_start_isAM:");       
+    Serial.print(tmp_Pump_start_isAM);       
+    Serial.println();
+    Serial.print(tmp_Pump_hour_array[i]);
+    Serial.print(") ");
+    Serial.print(AMPM_int);
+    Serial.println();
 
     boolean case_zero = false;
     switch (AMPM_int) {
